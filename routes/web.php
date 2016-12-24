@@ -13,3 +13,10 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/{name}', 'HomeController@show');
 
+Route::group(['prefix' => 'db'], function($r){
+    $r->get('insert', 'DBController@insert');
+    $r->get('update', 'DBController@update');
+    $r->get('delete', 'DBController@delete');
+    $r->match(['get', 'post'], 'select', 'DBController@select');
+});
+
