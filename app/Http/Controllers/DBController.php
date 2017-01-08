@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Test;
 use Illuminate\Http\Request;
 use DB;
 use D;
@@ -71,10 +72,11 @@ class DBController extends Controller
 
     public function select()
     {
-        if (\Request::isMethod('POST')) {
-            dd(\Request::get('title', 'default'));
-        }
-        $test = DB::table('test');
+        $test = Test::get();
+
+        // Test::where('id', '>', 12)->delete();
+
+        /*$test = DB::table('test');
 
         $all = $test
             ->where(function($query){
@@ -90,8 +92,52 @@ class DBController extends Controller
             // ->avg('age');
             ->get();
 
-        D::info($all);
+        D::info($all);*/
 
-        return view('db.select');
+        return view('db.select', ['test' => $test]);
+    }
+
+    // Test -> tests
+    public function store(Request $r)
+    {
+        $array = array_merge([
+            'user_id' => 1,
+        ], $r->except('_token'));
+
+        /*$test = new Test();
+
+        $test->username = $r->get('username');
+        $test->age = $r->get('age');
+        $test->password = bcrypt(111);
+        $test->user_id = 1;
+        $test->email = $r->get('email');
+
+        $test->save();*/
+
+        $test = Test::create($array);
+        // ...
+        // $test->save();
+        // dd($test);
+        //return redirect()->back();
+
+        return view('db.select', ['test' => Test::all()]);
+    }
+
+    public function show($people)
+    {
+        $people = Test::find($people);
+        dd($people);
+    }
+
+    public function change(Test $people)
+    {
+        return view('db.change', compact('people'));
+    }
+
+    public function modify(Test $people, Request $request)
+    {
+        $people->update($request->all());
+        
+        return redirect()->action('DBController@select');
     }
 }

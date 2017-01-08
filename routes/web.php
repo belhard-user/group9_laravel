@@ -18,5 +18,9 @@ Route::group(['prefix' => 'db'], function($r){
     $r->get('update', 'DBController@update');
     $r->get('delete', 'DBController@delete');
     $r->match(['get', 'post'], 'select', 'DBController@select');
+    $r->post('select/store', ['uses' => 'DBController@store', 'as' => 'db.store']);
+    $r->get('select/show/{people}', ['uses' => 'DBController@show', 'as' => 'db.show']);
+    $r->get('select/{people}/change', ['uses' => 'DBController@change', 'as' => 'db.change']);
+    $r->put('select/{people}/modify', ['uses' => 'DBController@modify', 'as' => 'db.mod']);
 });
 

@@ -2,10 +2,13 @@
 
 
 @section('content')
-    <form action="" method="post">
-        {{ csrf_field() }}
-        <input type="text" name="title">
-        <input type="text" name="msg">
-        <button>click</button>
-    </form>
+    {{ Form::open(['action' => 'DBController@store', 'class' => 'form-inline']) }}
+        @include('db.form', ['btnName' => 'Создать'])
+    {{ Form::close() }}
+
+    @foreach($test as $people)
+        <li>
+            <a href="{{ route('db.change', ['people' => $people->id]) }}">{{ $people->full_name }}</a>
+        </li>
+    @endforeach
 @stop
