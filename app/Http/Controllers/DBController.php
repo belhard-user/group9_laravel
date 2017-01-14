@@ -140,4 +140,50 @@ class DBController extends Controller
         
         return redirect()->action('DBController@select');
     }
+
+    public function relation()
+    {
+        $users = \App\User::all();
+
+        $test = \App\Test::first();
+
+        $test->customer()->get();
+        
+        return view('db.users', compact('users'));
+    }
+
+    public function relationUser(\App\User $user)
+    {
+        // user_id
+        $test = $user->record()->get();
+
+        dd($test);
+        return view('db.usersRelation', compact('test'));
+    }
+
+    public function hasMany()
+    {
+        /*$car = \App\Car::with('category')->get();
+
+        foreach ($car as $c){
+            echo $c->title . '<br>';
+            if($c->category->count()){
+                foreach($c->category as $cat) {
+                    echo "<li>" . $cat->title . "</li>";
+                }
+            }
+        }*/
+
+        $cat = \App\Category::first();
+            echo $cat->title .'<hr>';
+            if($cat->car->count()){
+                foreach ($cat->car as $car){
+                    echo $car->title . '<br>';
+                }
+            }
+
+        die;
+
+        return view('layouts.app');
+    }
 }

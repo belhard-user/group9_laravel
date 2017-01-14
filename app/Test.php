@@ -42,4 +42,9 @@ class Test extends Model
     {
         return $this->attributes['username'] = $val . '!!!';
     }*/
+
+    public function customer() // user_id
+    {
+        return $this->belongsTo(\App\User::class, 'user_id');
+    }
 }

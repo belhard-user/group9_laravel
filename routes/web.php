@@ -15,6 +15,9 @@ Route::get('/{name}', 'HomeController@show');
 
 Route::group(['prefix' => 'db'], function($r){
     $r->get('insert', 'DBController@insert');
+    $r->get('has-many', 'DBController@hasMany');
+    $r->get('relation', 'DBController@relation');
+    $r->get('relation/{user}', 'DBController@relationUser');
     $r->get('update', 'DBController@update');
     $r->get('delete', 'DBController@delete');
     $r->match(['get', 'post'], 'select', 'DBController@select');
