@@ -21,7 +21,8 @@ class IndexController extends Controller
 
     public function store(Request $request)
     {
-        auth()->user()->article()->create($request->all());
+        $article = auth()->user()->article()->create($request->all());
+        $article->tag()->attach($request->input('tags'));
 
         return redirect()->back();
     }
@@ -39,6 +40,7 @@ class IndexController extends Controller
     public function update(Request $request, Article $article)
     {
         $article->update($request->all());
+        $article->tag()->sync($request->get('tags'));
 
         return redirect()->back();
     }

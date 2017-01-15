@@ -10,6 +10,14 @@
             <section>{{ $article->short_description }}</section>
         </div>
     </div>
+
+    @if($article->tag->count())
+        @foreach($article->tag as $tag)
+            <span class="label label-success">{{ $tag->title }}</span>
+        @endforeach
+    @endif
 @endsection
+
+
 
 @section('title', $article->title)

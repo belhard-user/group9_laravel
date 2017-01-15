@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,5 +54,15 @@ class Article extends Model
         $lat = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Gh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya', '-','');
 
         return strtolower(str_replace($rus, $lat, $str));
+    }
+
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
+    public function getTagsAttribute()
+    {
+        return $this->tag()->pluck('id')->toArray();
     }
 }
