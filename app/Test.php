@@ -30,7 +30,7 @@ class Test extends Model
 {
     protected $table = 'test';
 
-    protected $fillable = ['username', 'user_id', 'email', 'age', 'password'];
+    protected $fillable = ['username', 'email', 'age', 'password'];
 
     // get*Attribute
     public function getFullNameAttribute()

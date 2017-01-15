@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\Category;
 use App\Test;
 use Illuminate\Http\Request;
 use DB;
@@ -163,6 +165,20 @@ class DBController extends Controller
 
     public function hasMany()
     {
+
+        auth()->user()->record()->create([
+            'username' => 'sadas',
+            'email' => 'sadasd',
+            'age' => 23,
+            'password' => bcrypt(111)
+        ]);
+
+        /*$car = Car::first();
+
+        $car->category()->attach([1, 2, 3]);*/
+
+
+
         /*$car = \App\Car::with('category')->get();
 
         foreach ($car as $c){
@@ -174,7 +190,7 @@ class DBController extends Controller
             }
         }*/
 
-        $cat = \App\Category::first();
+        $cat = Category::first();
             echo $cat->title .'<hr>';
             if($cat->car->count()){
                 foreach ($cat->car as $car){
