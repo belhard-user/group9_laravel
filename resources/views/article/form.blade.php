@@ -15,7 +15,7 @@
 
 <div class="form-group">
     {!! Form::label('Когда покозать') !!}
-    {{ Form::date('published_at', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
+    {{ Form::date('published_at', $article->published_at , ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">

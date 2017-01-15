@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $fillable = ['title', 'published_at', 'short_description', 'body', 'user_id'];
+    protected $dates = ['published_at'];
 
     public function setTitleAttribute($value)
     {
