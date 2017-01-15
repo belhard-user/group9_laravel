@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $body
  * @property string $slug
  * @property int $user_id
- * @property \Carbon\Carbon $published_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $published_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereShortDescription($value)
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
-    protected $fillable = ['title', 'published_at', 'short_description', 'body', 'user_id'];
+    protected $fillable = ['title', 'published_at', 'short_description', 'body'];
     protected $dates = ['published_at'];
 
     public function setTitleAttribute($value)
@@ -38,13 +39,13 @@ class Article extends Model
             $this->attributes['slug'] = $this->translit($value);
         }
         $this->attributes['title'] = $value;
-
-        $this->attributes['user_id'] = 1;
     }
 
     public function scopePopulate($query)
     {
-        return $query->orderBy('published_at', 'desc');
+        return $query
+            ->where('published_at', '<=', Carbon::now())
+            ->orderBy('published_at', 'desc');
     }
 
     private function translit($str) {
