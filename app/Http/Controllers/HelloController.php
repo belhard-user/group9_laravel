@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('index');
+    }
+
     public function index()
     {
         $names = [

@@ -27,3 +27,7 @@ Route::group(['prefix' => 'db'], function($r){
     $r->put('select/{people}/modify', ['uses' => 'DBController@modify', 'as' => 'db.mod']);
 });
 
+Route::group(['prefix' => 'admin-panel', 'middleware' => 'admin'], function($r){
+    
+});
+
