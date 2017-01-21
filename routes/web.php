@@ -7,6 +7,8 @@ Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], function(){
 Route::get('hello', ['uses' =>'HelloController@index', 'as' => 'hello']);
 Route::get('show/{name}', ['uses' => 'HelloController@show', 'as' => 'show.user.name']);
 
+Route::get('form', 'FormController@index');
+Route::post('form', 'FormController@store');
 
 Auth::routes();
 
@@ -30,4 +32,6 @@ Route::group(['prefix' => 'db'], function($r){
 Route::group(['prefix' => 'admin-panel', 'middleware' => 'admin'], function($r){
     
 });
+
+
 
