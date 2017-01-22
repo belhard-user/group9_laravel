@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Article;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +20,7 @@ class IndexController extends Controller
         return view('article.create');
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         $article = auth()->user()->article()->create($request->all());
         $article->tag()->attach($request->input('tags'));
@@ -37,7 +38,7 @@ class IndexController extends Controller
         return view('article.update')->withArticle($article);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
         $article->update($request->all());
         $article->tag()->sync($request->get('tags'));
