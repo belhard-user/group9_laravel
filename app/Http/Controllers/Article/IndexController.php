@@ -25,6 +25,8 @@ class IndexController extends Controller
         $article = auth()->user()->article()->create($request->all());
         $article->tag()->attach($request->input('tags'));
 
+        $this->saveFile($request, $article);
+
         return redirect()->back();
     }
 
@@ -41,8 +43,32 @@ class IndexController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $article->update($request->all());
+        $this->saveFile($request, $article);
         $article->tag()->sync($request->get('tags'));
 
         return redirect()->back();
+    }
+
+    /**
+     * @param ArticleRequest $request
+     * @param $article
+     */
+    protected function saveFile(ArticleRequest $request, Article $article)
+    {
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                /** @var \Illuminate\Http\UploadedFile $image */
+                $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $ext = $image->extension();
+                $fullname = sprintf('%s_%s.%s', time(), $name, $ext);
+
+                $path = $image->storeAs('article', $fullname);
+
+                $article->images()->create([
+                    'name' => sprintf('%s.%s', $name, $ext),
+                    'path' => $path
+                ]);
+            }
+        }
     }
 }

@@ -23,6 +23,12 @@
     {!! Form::label('Тэги') !!}
     {{ Form::select('tags[]', \App\Tag::getTagList(), null, ['class' => 'form-control', 'multiple']) }}
 </div>
+
+<div class="form-group">
+    {!! Form::label('Photos') !!}
+    {{ Form::file('images[]', ['class' => 'form-control', 'multiple']) }}
+</div>
+
 <div class="form-group">
     <input type="submit" class="btn btn-primary" value="{{ $btn }}">
 </div>

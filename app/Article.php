@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Image;
 use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -57,5 +58,10 @@ class Article extends Model
     public function getTagsAttribute()
     {
         return $this->tag()->pluck('id')->toArray();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
