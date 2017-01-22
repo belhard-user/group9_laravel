@@ -5,6 +5,8 @@ Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], function(){
 });
 
 Route::get('hello', ['uses' =>'HelloController@index', 'as' => 'hello']);
+Route::get('file', ['uses' =>'FileController@index', 'as' => 'file']);
+Route::post('file', ['uses' =>'FileController@save', 'as' => 'file.upload']);
 Route::get('show/{name}', ['uses' => 'HelloController@show', 'as' => 'show.user.name']);
 
 Route::get('form', 'FormController@index');

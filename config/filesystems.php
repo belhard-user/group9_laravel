@@ -42,6 +42,10 @@ return [
     */
 
     'disks' => [
+        'belhard' => [
+            'driver' => 'local',
+            'root' => public_path('trash')
+        ],
 
         'local' => [
             'driver' => 'local',

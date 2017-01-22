@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            color: red;
+            background-color: black;
+            padding: 1em;
+            width: 300px;
+        }
+        .foo{
+            width: 500px;
+            color: white;
+            background-color: #369;
+        }
+    </style>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+</head>
+<body>
+<!--<img src="42.gif" alt="" style="display: none">-->
+<div>
+    Lorem ipsum dolor sit amet.<br>
+    Lorem ipsum dolor sit amet.<br>
+    Lorem ipsum dolor sit amet.<br>
+    Lorem ipsum dolor sit amet.<br>
+    Lorem ipsum dolor sit amet.<br>
+</div>
+<button>click</button>
+<script src="jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script>
+
+
+    $('button').on('click', function(){
+        // $('div').toggleClass('foo', 2000);
+        /*$('div').animate({
+            width: '+=300px',
+            color: 'white',
+            'background-color': '#369'
+        }, 3000, 'easeInOutBack');*/
+
+        $('div').draggable({
+            axis: "x"
+        });
+    });
+
+
+    /*(function($){
+        $.fn.colorized = function(global, fn){
+            var option = {
+                color: 'green'
+            };
+
+            option = this.extend(option, global);
+
+            this.css('color', option.color);
+
+            $.isFunction(fn) && fn.call(this, option, this);
+
+            return this;
+        };
+    })(jQuery);
+
+
+    $('a').on('click', function(e){
+        e.preventDefault();
+
+        $(this).colorized().addClass('foo');
+    });*/
+
+
+
+
+    /*$.fx.speeds.topGear = 5000;
+
+    $('button').on('click', function(){
+        var div = $('div');
+
+        div.fadeToggle(800);*/
+        /*if(div.is(':visible')){
+           div.hide(800)
+        }else{
+            div.show(800);
+        }*/
+
+
+
+        /*var div = $('div'),
+            img = $('img').css({
+                'display': '',
+                'position': 'absolute'
+            }),
+            progress1 = $('<section>', {class: 'progress'});
+
+        progress1.prependTo('body');
+
+        div.animate({
+            width: '+=100px',
+            fontSize: '+=5px',
+            height: 'toggle'
+        }, {
+            duration: 'topGear',
+            step: function(now, tween){
+                // console.log('hello');
+            },
+            progress: function(animation, progress, remainingMs){
+                var percentage = Math.round(progress * 100);
+
+                progress1.css('width', percentage + '%');
+            },
+            complete: function(){
+                progress1.remove();
+            }
+        });*/
+    // });
+</script>
+</body>
+</html>
