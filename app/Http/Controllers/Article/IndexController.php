@@ -28,7 +28,9 @@ class IndexController extends Controller
 
         $this->saveFile($request, $article);
 
-        return redirect()->back();
+        flash("Новость {$article->title} создана");
+
+        return redirect()->route('article.index');
     }
 
     public function show(Article $article)
@@ -46,8 +48,10 @@ class IndexController extends Controller
         $article->update($request->all());
         $this->saveFile($request, $article);
         $article->tag()->sync($request->get('tags'));
+        
+        flash("Новость {$article->title} обновлена")->important();
 
-        return redirect()->back();
+        return redirect()->route('article.index');
     }
 
     /**
@@ -86,6 +90,8 @@ class IndexController extends Controller
         \Storage::disk('article')->delete([$image->path, $image->thpath]);
 
         $image->delete();
+
+        flash()->info('Картинка удалена');
         
         return redirect()->back();
     }

@@ -24,6 +24,9 @@
 <body>
     <div id="app">
         @include('partials.nav')
+        <div class="container">
+        @include('partials.notify')
+        </div>
         @yield('content')
     </div>
 

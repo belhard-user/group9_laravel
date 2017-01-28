@@ -1,5 +1,9 @@
 <?php
 
+Route::get('test', function(){
+    dd(session()->all());
+    // forget('key') -> unset($_SESSION['key'])
+});
 
 Auth::routes();
 
@@ -8,7 +12,7 @@ Route::group(['namespace' => 'Article', 'prefix' => 'news'], function($r){
     $r->get('create', ['uses' => 'IndexController@create', 'as' => 'article.create'])->middleware('auth');
     $r->get('/{article}', ['uses' => 'IndexController@show', 'as' => 'article.show']);
     $r->get('/{article}/edit', ['uses' => 'IndexController@edit', 'as' => 'article.edit']);
-    $r->delete('/{image}/deleteImage', ['uses' => 'IndexController@delete', 'as' => 'article.delete']);
+    $r->delete('/{image}/delete', ['uses' => 'IndexController@deleteImage', 'as' => 'article.delete']);
     $r->post('store', ['uses' => 'IndexController@store', 'as' => 'article.store']);
     $r->put('/{article}/update', ['uses' => 'IndexController@update', 'as' => 'article.update']);
 });
