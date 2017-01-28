@@ -44,7 +44,7 @@ return [
     'disks' => [
         'article' => [
             'driver' => 'local',
-            'root' => public_path('articles_storage')
+            'root' => public_path()
         ],
 
         'local' => [

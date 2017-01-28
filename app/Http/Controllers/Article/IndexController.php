@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
+use Image as II;
 use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
@@ -62,13 +63,30 @@ class IndexController extends Controller
                 $ext = $image->extension();
                 $fullname = sprintf('%s_%s.%s', time(), $name, $ext);
 
-                $path = $image->storeAs('article', $fullname);
+                $path = $image->storeAs('article', $fullname, 'article');
+
+                $ii = II::make(public_path($path));
+
+                $thpath = $ii
+                    ->fit(200)
+                    ->text('Blog', 20, 20)
+                    ->save(public_path('article') . '/th-' . $fullname);
 
                 $article->images()->create([
                     'name' => sprintf('%s.%s', $name, $ext),
-                    'path' => $path
+                    'path' => $path,
+                    'thpath' => 'article/' . $thpath->basename
                 ]);
             }
         }
+    }
+
+    public function deleteImage(\App\Image $image)
+    {
+        \Storage::disk('article')->delete([$image->path, $image->thpath]);
+
+        $image->delete();
+        
+        return redirect()->back();
     }
 }

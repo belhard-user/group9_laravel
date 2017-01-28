@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     protected $fillable = [
-        'name', 'path'
+        'name', 'path', 'thpath'
     ];
 
     public function article()
