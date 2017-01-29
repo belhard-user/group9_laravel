@@ -1,5 +1,11 @@
 <?php
 
+Route::get('xxx-app', function(\App\Xxx\iXxx $b){
+    Bar::foo2()->foo2()->foo3();
+
+    die;
+});
+
 Route::get('test', function(){
     dd(session()->all());
     // forget('key') -> unset($_SESSION['key'])

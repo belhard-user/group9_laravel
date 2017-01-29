@@ -178,6 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\XxxProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Bar' => App\Xxx\MyFacede::class
 
     ],
 

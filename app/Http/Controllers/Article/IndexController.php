@@ -13,7 +13,7 @@ class IndexController extends Controller
     public function index()
     {
         $news = Article::populate('published_at')->paginate();
-        
+
         return view('article.index', compact('news'));
     }
     public function create()
