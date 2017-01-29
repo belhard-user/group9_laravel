@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="container">
+        @can('article-update', $article)
+            <div class="row">
+                <a class="btn btn-warning" href="{{ route('article.edit', ['article' => $article->slug]) }}">Редактировать</a>
+
+                @can('article-delete', $article)
+                    <a class="btn btn-warning" href="#">Удалить</a>
+                @endcan
+            </div>
+        @endcan
         <div class="row">
             <div class="col-md-7">
                 <div>
