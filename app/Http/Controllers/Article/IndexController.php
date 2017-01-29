@@ -13,6 +13,7 @@ class IndexController extends Controller
     public function index()
     {
         $news = Article::populate('published_at')->paginate();
+        // event(new \App\Events\XxxEvent($news));
 
         return view('article.index', compact('news'));
     }
@@ -23,6 +24,7 @@ class IndexController extends Controller
 
     public function store(ArticleRequest $request)
     {
+        event('beforeSaveArticle', $request);
         $article = auth()->user()->article()->create($request->all());
         $article->tag()->attach($request->input('tags'));
 

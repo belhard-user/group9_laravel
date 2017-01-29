@@ -21,6 +21,10 @@ class XxxProvider extends ServiceProvider
         \View::composer('layouts.app', function ($view) {
             $view->with('foo', 'bar');
         });
+
+        \Event::listen('beforeSaveArticle', function ($request) {
+             $request->request->add(['title' => $request->title . '!!!!']);
+        });
     }
 
     /**
